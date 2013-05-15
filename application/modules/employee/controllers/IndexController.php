@@ -2,7 +2,9 @@
 
 class Employee_IndexController extends Zend_Controller_Action
 {
-
+    private $department;
+    private $employee;
+    
     public function init()
     {
         /* Initialize action controller here */
@@ -19,11 +21,82 @@ class Employee_IndexController extends Zend_Controller_Action
          
         // setting a separator string for segments:
         $this->view->headTitle()->setSeparator(' / ');
+        
+        $this->department = new Model_Department();
+        $this->employee = new Model_Employee();
     }
 
     public function indexAction()
     {        
         $this->view->message = "This is the INDEX Action within the INDEX Controller within the EMPLOYEE Module";
+    }
+    
+    public function homeAction()
+    {
+        $employee_list = $this->employee->getAllEmployees();
+        $this->view->user_list = $employee_list;
+        $this->logger->info($employee_list);
+    }
+    
+    public function deptAction()
+    {
+        $deptartment_list=$this->department->getDepartmentList();
+        $this->view->dept_list = $deptartment_list;
+        $rhis->logger->info($employee_list);
+    }
+    
+    public function editAction()
+    {
+        $params = $this->_request->getParams();
+        $this->logger->info($params);
+        $empData=$this->employee->getEmployeeById($params['employeeId']);
+        $jobData=$this->employee->getJobPosition();
+        $this->view->employeeRecordById=$empData;
+        $this->view->jobId=$jobData;
+    }
+    
+    public function updateAction()
+    {
+        $params = $this->_request->getParams();
+        $firstname = $params['fname'];
+        $lastname = $params['lname'];
+        $dob = $params['dob'];
+        $job = $params['job'];
+        $join_date = $params['join_date'];
+        $sex = $params['sex'];
+        $status = $params['status'];
+        $employeeId = $params['employeeId'];        
+        $this->logger->info($params);
+        $data = $this->employee->updateEmployeeById($firstname,$lastname,$dob,$job,$join_date,$sex,$status,$employeeId);
+        $this->view->success=$data;
+    }
+    
+    public function addAction()
+    {
+        $jobData=$this->employee->getJobPosition();
+        $this->view->jobData=$jobData;
+    }
+    
+    public function newempAction()
+    {
+        $params = $this->_request->getParams();
+        $firstname = $params['fname'];
+        $lastname = $params['lname'];
+        $dob = $params['dob'];
+        $job = $params['job'];
+        $join_date = $params['join_date'];
+        $sex = $params['sex'];
+        $status = $params['status'];        
+        $this->logger->info($params);
+        $data = $this->employee->addNewEmployee($firstname,$lastname,$dob,$job,$join_date,$sex,$status);
+        $this->view->message='Record Added to Database';
+    }
+    
+    public function deleteAction()
+    {
+        $params = $this->_request->getParams();
+        $data=$this->employee->deleteEmployeeById($this->$params['employeeId']);
+        $this->view->success=$data;
     }
 }
 

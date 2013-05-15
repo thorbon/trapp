@@ -1,0 +1,38 @@
+<h3>Employee Infomration Page</h3>
+<a href='add'>Add New Employee Record</a>
+<hr/>
+<table border=1>
+<tr>
+<th>Employee ID</th>
+<th>First Name</th>
+<th>Last Name</th>
+<th>Date of Birth</th>
+<th>Age</th>
+<th>Job Position</th>
+<th>Join Date</th>
+<th>Tenure</th>
+<th>Gender</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+
+<?php
+for($i=0;$i<count($this->user_list);$i++)
+{
+    echo "<tr>
+          <td>{$this->user_list[$i]["employee_id"]}</td>
+          <td>{$this->user_list[$i]["firstname"]}</td>
+          <td>{$this->user_list[$i]["lastname"]}</td>
+          <td>{$this->user_list[$i]["date_of_birth"]}</td>
+          <td>{$this->user_list[$i]["age"]}</td>
+          <td>{$this->user_list[$i]["job_position_name"]}</td>
+          <td>{$this->user_list[$i]["join_date"]}</td>
+          <td>{$this->user_list[$i]["tenure"]}</td>
+          <td>{$this->user_list[$i]["sex"]}</td>
+          <td>{$this->user_list[$i]["status"]}</td>
+          <td><a href='edit/?employeeId={$this->user_list[$i]["employee_id"]}'>Edit</a> | <a href='delete/?employeeId={$this->user_list[$i]["employee_id"]}'>Delete</a></td>
+          </tr>";
+}
+?>
+
+</table>

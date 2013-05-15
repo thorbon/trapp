@@ -6,7 +6,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         parent::__construct($application);
         $this->__initConfig();
-        //$this->__initDatabase();
+        $this->__initDatabase();
         $this->__initRegisterLogger();
         $this->__initView();
         $this->__initViewHelpers();
@@ -22,7 +22,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $resource = $this->getPluginResource('multidb');
         $resource->init();
-        $web_db = $resource->getDb('zendapp_web');
         $module3_db = $resource->getDb('zendapp_module3');
         
         if ($this->getEnvironment() != 'production') {
@@ -31,11 +30,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             // Enable it
             $profiler->setEnabled(true);
             // Attach the profiler to your db adapter 
-            $web_db->setProfiler($profiler);
             $module3_db->setProfiler($profiler);
         }
         
-        Zend_Registry::set('Zend_Web_Db', $web_db);
         Zend_Registry::set('Zend_Module3_Db', $module3_db);
     }
     

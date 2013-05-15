@@ -1,10 +1,10 @@
 <?php
   
-class Model_User
+class Model_Department
 {
     function __construct()
     {
-        $this->db = Zend_Registry::get('Zend_Module1_Db');
+        $this->db = Zend_Registry::get('Zend_Module3_Db');
         $this->logger = Zend_Registry::get('Zend_Log');
     }
     
@@ -15,18 +15,20 @@ class Model_User
      * @parameter float $arg2
      * @return array
      */
-    function getUser($arg1, $arg2)
+    function getDepartmentList()
     {
         try
         {
-            $sql = $this->db->select()
-                            ->from(array('T1' => 'table1'))
-                            ->where('T1.column1 = ?', $arg1)
+            $sql = $this->db->select()->from(array('department'))
+                                      ->join('employee','department.manager_id=employee.employee_id',array('employee.firstname','employee.lastname'));
+                            /*->where('T1.column1 = ?', $arg1)
                             ->where('T1.column2 = ?', $arg2)
                             ->where('T1.column3 = ?', 'ACTIVE')
-                            ->limit(1);
+                            ->limit(1);*/
                             
-            $data = $this->db->fetchRow($sql);
+            $data = $this->db->fetchAll($sql);
+            
+            $this->logger->info("This is a test info");
             
             if ($data)
                 return $data;
@@ -39,3 +41,4 @@ class Model_User
         return false;
     }
 }
+?>

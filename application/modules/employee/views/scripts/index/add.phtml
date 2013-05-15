@@ -1,0 +1,47 @@
+<h3>Add New Employee Page</h3>
+
+
+<form method = "post" action="newemp">
+
+<label>First Name</label>
+<input type="text" name="fname" selected="false">
+<br>
+<label>Last Name</label>
+<input type="text" name="lname" selected="false">
+<br>
+<label>Date of Birth (Format:YYYY-MM-DD)</label>
+<input type="text" name="dob" selected="false">
+<br>
+<label>Job Title</label>
+<select name="job"> 
+<option selected="true" value="0">--Select One--</option>    
+ <?php
+    foreach($this->jobData as $jobTitle):
+  ?>
+  <option value="<?php echo $jobTitle["job_position_id"]?>"><?php echo $jobTitle["job_position_name"]?></option>
+  <?php
+    endforeach;
+  ?>    
+</select>
+<br>
+<label>Join Date (Format:YYYY-MM-DD)</label>
+<input type="text" name="join_date" selected="false">
+<br>
+<label>Gender</label>
+<select name="sex">
+<option selected="true" value="0">--Select One--</option>    
+<option value="Female">Female</option>
+<option value="Male">Male</option>
+</select> 
+<br>
+<label>Status</label>
+<select name = "status">
+<option selected="true" value="0">--Select One--</option>    
+<option value="ACTIVE">ACTIVE</option>
+<option value="INACTIVE">INACTIVE</option>
+</select>
+<br><br>
+<button type="submit">Add Record</button>
+
+</form>
+

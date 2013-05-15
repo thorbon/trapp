@@ -1,0 +1,22 @@
+<h3>Department Information Page</h3>
+<hr/>
+<table border=1>
+<tr>
+<th>Department ID</th>
+<th>Department Name</th>
+<th>Employee Count</th>
+<th>Manager First Name</th>
+<th>Manager Last Name</th>
+</tr>
+ <?php
+ for($i=0;$i<count($this->dept_list);$i++)
+{
+    echo "<tr>
+          <td>{$this->dept_list[$i]["department_id"]}</td>
+          <td>{$this->dept_list[$i]["name"]}</td>
+          <td>{$this->dept_list[$i]["employee_count"]}</td>
+          <td>{$this->dept_list[$i]["firstname"]}</td>
+          <td>{$this->dept_list[$i]["lastname"]}</td>
+          </tr>";
+}
+ ?>
