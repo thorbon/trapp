@@ -14,9 +14,30 @@
 <meta name="creation-date" content="01/01/2009">
 <meta name="revisit-after" content="15 days">
 <?php echo $this->headTitle(); ?>
-<link rel="stylesheet" type="text/css" href="my.css">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl() ?>/public/css/my.css">
 </head>
 <body>
-  <?php echo $this->layout()->content; ?>
+<div class="header">
+    <span class="logo-1">Philo</span>
+    <span class="logo-2">Tech</span>
+</div>
+
+<div id="main-content">
+    <div id="menu">
+        <h2>Menu</h2>
+        <hr/>
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Add New Employee</a></li>
+            <li><a href="">Find Employee</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <?php echo $this->layout()->content; ?>
+    </div>
+</div>
+<div class="footer">
+    <p>Copyright | 2013</p>
+</div>
 </body>
 </html>

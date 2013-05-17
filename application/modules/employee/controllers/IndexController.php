@@ -12,7 +12,9 @@ class Employee_IndexController extends Zend_Controller_Action
         $this->logger = Zend_Registry::get('Zend_Log');
         
         // setting the site in the title; possibly in the layout script:
-        $this->view->headTitle('Module 1');
+        $this->view->headTitle('Home');
+        
+        //$this->_helper->layout->setLayout('left-sidebar');
         
         // setting the controller and action name as title segments:
         $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -95,7 +97,7 @@ class Employee_IndexController extends Zend_Controller_Action
     public function deleteAction()
     {
         $params = $this->_request->getParams();
-        $data=$this->employee->deleteEmployeeById($this->$params['employeeId']);
+        $data=$this->employee->deleteEmployeeById($params['employeeId']);
         $this->view->success=$data;
     }
 }
