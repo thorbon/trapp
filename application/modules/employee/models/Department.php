@@ -1,6 +1,6 @@
 <?php
   
-class Model_Department
+class Employee_Model_Department
 {
     function __construct()
     {
@@ -29,6 +29,31 @@ class Model_Department
             $data = $this->db->fetchAll($sql);
             
             $this->logger->info("This is a test info");
+            
+            if ($data)
+                return $data;
+        }
+        catch (Exception $e)
+        {
+            $this->logger->err(__CLASS__."->".__FUNCTION__.": {$e->getMessage()}");
+        }
+        
+        return false;
+    }
+    
+    function getDepartmentListOnly()
+    {
+        try
+        {
+            $sql = $this->db->select()->from(array('job_position'), array('job_position_id', 'job_position_name'));
+                            /*->where('T1.column1 = ?', $arg1)
+                            ->where('T1.column2 = ?', $arg2)
+                            ->where('T1.column3 = ?', 'ACTIVE')
+                            ->limit(1);*/
+                            
+            $data = $this->db->fetchPairs($sql);
+            
+            $this->logger->info($data);
             
             if ($data)
                 return $data;

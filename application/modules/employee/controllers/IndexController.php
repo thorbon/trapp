@@ -24,8 +24,8 @@ class Employee_IndexController extends Zend_Controller_Action
         // setting a separator string for segments:
         $this->view->headTitle()->setSeparator(' / ');
         
-        $this->department = new Model_Department();
-        $this->employee = new Model_Employee();
+        $this->department = new Employee_Model_Department();
+        $this->employee = new Employee_Model_Employee();
     }
 
     public function indexAction()
@@ -99,6 +99,27 @@ class Employee_IndexController extends Zend_Controller_Action
         $params = $this->_request->getParams();
         $data=$this->employee->deleteEmployeeById($params['employeeId']);
         $this->view->success=$data;
+    }
+    
+    function newemployeeAction()
+    {
+        $form = new Employee_Form_Newemployee();
+        
+        if ($this->_request->isPost()) {
+            
+            $form_data = $this->_request->getParams();
+            
+            if ($form->isValid($form_data)) {
+                $this->view->message = "Form is VALID";
+            } else {
+                $this->view->message = "Form is INVALID";
+                
+                //$form->populate($form_data);
+                $this->view->form = $form;
+            }
+        } else {
+            $this->view->form = $form;
+        } 
     }
 }
 
