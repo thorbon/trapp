@@ -1,6 +1,6 @@
 <?php
   
-class Model_Department
+class Employee_Model_Department
 {
     function __construct()
     {
@@ -40,5 +40,28 @@ class Model_Department
         
         return false;
     }
+    
+    function getDepartmentListOnly()
+    {
+        try
+        {
+            $sql = $this->db->select()->from(array('job_position'), array('job_position_id', 'job_position_name'));
+                            
+                            
+            $data = $this->db->fetchPairs($sql);
+            
+            $this->logger->info($data);
+            
+            if ($data)
+                return $data;
+        }
+        catch (Exception $e)
+        {
+            $this->logger->err(__CLASS__."->".__FUNCTION__.": {$e->getMessage()}");
+        }
+        
+        return false;
+    }
 }
+
 ?>

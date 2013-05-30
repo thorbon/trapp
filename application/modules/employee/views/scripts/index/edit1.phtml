@@ -1,0 +1,77 @@
+<h3>Edit Page</h3>
+
+
+<form method = "post" action="../update/?employeeId=<?php echo $this->employeeRecordById['employee_id']?>">
+
+<label>Employee ID Number: <?php echo $this->employeeRecordById['employee_id']?></label>
+<br>
+<label>First Name</label>
+<input type="text" name="fname" selected="true" value="<?php echo $this->employeeRecordById['firstname']?>">
+<br>
+<label>Last Name</label>
+<input type="text" name="lname" selected="true" value="<?php echo $this->employeeRecordById['lastname']?>">
+<br>
+<label>Date of Birth (Format:YYYY-MM-DD)</label>
+<input type="text" name="dob" selected="true" value="<?php echo $this->employeeRecordById['date_of_birth']?>">
+<br>
+<label>Job Title</label>
+<select name="job">
+<?php
+    foreach($this->jobId as $deptRecord):
+    ?>  
+      <?php
+      if($deptRecord['job_position_id']==$this->employeeRecordById['job_position_id']):
+            ?>
+       <option selected = "true" value="<?php echo $deptRecord['job_position_id']?>"><?php echo $deptRecord['job_position_name']?></option>';
+      
+      <?php
+      else:
+            ?>             
+       <option value="<?php echo $deptRecord['job_position_id']?>"><?php echo $deptRecord['job_position_name']?></option>';
+       <?php
+       endif;
+            ?>
+<?php
+    endforeach;
+    ?>       
+</select>
+<br>
+<label>Join Date (Format:YYYY-MM-DD)</label>
+<input type="text" name="join_date" selected="true" value="<?php echo $this->employeeRecordById['join_date']?>" >
+<br>
+<label>Gender</label>
+<select name="sex">
+<?php
+    if($this->employeeRecordById['sex']=='MALE')
+    {
+        echo '<option selected ="true" value="male" >Male</option>';
+        echo '<option value="female">Female</option>';
+    }
+    else
+    {
+        echo '<option value="male">Male</option>';
+        echo '<option value="female" selected ="true">Female</option>';
+    }
+?>
+</select> 
+<br>
+<label>Status</label>
+<select name = "status">
+<<?php
+      if($this->employeeRecordById['status']=="ACTIVE")
+      {
+          echo '<option selected="true" value="active">ACTIVE</option>';
+          echo '<option value="inactive">INACTIVE</option>';
+      }
+      else
+      {
+          echo '<option selected="true" value="inactive">INACTIVE</option>';
+          echo '<option value="active">ACTIVE</option>';
+      }
+  ?>
+</select>
+<br><br>
+<button type="submit">Apply Changes</button>
+
+</form>
+

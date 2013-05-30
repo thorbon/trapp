@@ -1,6 +1,6 @@
 <?php
   
-class Model_Employee
+class Employee_Model_Employee
 {
     function __construct()
     {
@@ -28,7 +28,7 @@ class Model_Employee
                             
             $data = $this->db->fetchAll($sql);
             
-            $this->logger->info("This is a test info");
+         
             
             if ($data)
                 return $data;
@@ -177,11 +177,15 @@ class Model_Employee
             $data['tenure'] = $years_tenure;
             
             $this->db->insert('employee', $data);
+            
+            if($data)
+            return true;
         }
         catch (Exception $e)
         {
             $this->logger->err(__CLASS__."->".__FUNCTION__.": {$e->getMessage()}");
         }
+            return false;
     }
     
     function deleteEmployeeById($empId)
